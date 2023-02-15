@@ -1,0 +1,36 @@
+import com.julo.weatherdex.Plugins
+import com.julo.weatherdex.libs.AndroidX
+import com.julo.weatherdex.libs.Chucker
+import com.julo.weatherdex.libs.Google
+import com.julo.weatherdex.libs.Jetbrains
+import com.julo.weatherdex.libs.SquareUp
+
+apply plugin: Plugins.androidLibrary
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinKapt
+apply plugin: Plugins.daggerHilt
+
+dependencies {
+    implementation Jetbrains.coroutineCore
+
+    /** Chucker **/
+    debugImplementation Chucker.chucker
+    releaseImplementation Chucker.chuckerNoop
+
+    /** Square Up **/
+    implementation SquareUp.retrofit
+    implementation SquareUp.retrofitConverterGson
+    implementation SquareUp.retrofitAdapterRxjava2
+    implementation SquareUp.retrofitConverterScalars
+    implementation SquareUp.okHttp
+    implementation SquareUp.loggingInterceptor
+
+    implementation Google.hilt
+    kapt Google.hiltCompiler
+
+    implementation Google.gson
+
+    androidTestImplementation AndroidX.testRunner
+    androidTestImplementation AndroidX.testExtJunit
+    androidTestImplementation Jetbrains.coroutineTest
+}
