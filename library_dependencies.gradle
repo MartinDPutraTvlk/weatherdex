@@ -1,0 +1,66 @@
+import com.julo.weatherdex.libs.*
+
+dependencies {
+
+    /** Kotlin **/
+    implementation Jetbrains.kotlin
+
+    /** AndroidX **/
+    implementation AndroidX.coreKtx
+    implementation AndroidX.appCompat
+    implementation AndroidX.constraintLayout
+    implementation AndroidX.preferenceManager
+    implementation AndroidX.lifeCycleViewModel
+    implementation AndroidX.lifeCycleLiveData
+    implementation AndroidX.lifeCycleProcess
+    implementation AndroidX.multidex
+    implementation AndroidX.swipeRefreshLayout
+    implementation AndroidX.legacySupport
+    implementation AndroidX.navigationFragment
+    implementation AndroidX.navigationUi
+    implementation AndroidX.pagingRuntime
+    implementation AndroidX.exifInterface
+
+    /** Google **/
+    implementation Google.materialDesign
+    implementation Google.crashlytics
+    implementation Google.analytics
+    implementation Google.firebaseMessaging
+    implementation Google.firebaseConfig
+    implementation Google.firebasePerformance
+    implementation Google.gson
+    implementation Google.hilt
+    kapt Google.hiltCompiler
+    implementation Google.maps
+    implementation Google.places
+
+    /** Jetbrains **/
+    implementation Jetbrains.coroutineCore
+    implementation Jetbrains.coroutineAndroid
+
+    /** Testing **/
+    androidTestImplementation AndroidX.testExtJunit
+    androidTestImplementation AndroidX.testEspresso
+
+    testImplementation AndroidX.lifeCycleLivedataCore
+    testImplementation UnitTesting.jUnit
+    testImplementation UnitTesting.mockk
+    testImplementation Jetbrains.coroutineTest
+    testImplementation(AndroidX.coreTesting, {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+        exclude group: 'org.mockito', module: 'mockito-core'
+    })
+
+    implementation Jetbrains.coroutineTest
+    implementation UnitTesting.jUnit
+
+    /** Square Up **/
+    implementation SquareUp.retrofit
+    implementation SquareUp.retrofitConverterGson
+    implementation SquareUp.retrofitAdapterRxjava2
+    implementation SquareUp.retrofitConverterScalars
+    implementation SquareUp.okHttp
+    implementation SquareUp.loggingInterceptor
+}

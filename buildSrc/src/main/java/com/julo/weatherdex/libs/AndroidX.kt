@@ -17,6 +17,22 @@ object AndroidX {
     const val lifeCycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion"
     const val lifeCycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycleVersion"
     const val lifeCycleProcess = "androidx.lifecycle:lifecycle-process:$lifeCycleVersion"
+    const val lifeCycleLivedataCore = "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifeCycleVersion"
+    const val lifeCycleCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifeCycleVersion"
+    const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$lifeCycleVersion"
+
+    const val composeVersion = "1.1.0-beta01"
+    const val composeUi = "androidx.compose.ui:ui:$composeVersion"
+    const val composeMaterial = "androidx.compose.material:material:$composeVersion"
+    const val composeToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    const val composeActivity = "androidx.activity:activity-compose:1.3.1"
+    const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
+    const val composeUiTestJunit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
+
+    private const val junitExtVersion = "1.1.3"
+    const val junitExt = "androidx.test.ext:junit:$junitExtVersion"
+
+
 
     private const val multidexVersion = "2.0.1"
     const val multidex = "androidx.multidex:multidex:$multidexVersion"
@@ -45,9 +61,6 @@ object AndroidX {
 
     private const val coreTestingVersion = "2.0.0"
     const val coreTesting = "androidx.arch.core:core-testing:$coreTestingVersion"
-
-    private const val lifeCycleLivedataCoreVersion = "2.4.1"
-    const val lifeCycleLivedataCore = "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifeCycleLivedataCoreVersion"
 
     private const val exifInterfaceVersion = "1.3.3"
     const val exifInterface = "androidx.exifinterface:exifinterface:$exifInterfaceVersion"

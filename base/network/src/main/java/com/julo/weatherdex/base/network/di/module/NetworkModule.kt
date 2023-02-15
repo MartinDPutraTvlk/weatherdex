@@ -32,10 +32,6 @@ object NetworkModule {
             .build()
     }
 
-    @Named("baseUrl")
-    @Provides
-    fun providesBaseUrl() = "https://api.openweathermap.org"
-
     @Provides
     fun provideGsonConverterFactory() : Converter.Factory = GsonConverterFactory.create()
 

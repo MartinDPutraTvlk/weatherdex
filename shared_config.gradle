@@ -1,0 +1,41 @@
+import com.julo.weatherdex.AndroidConfig
+import com.julo.weatherdex.Build
+import com.julo.weatherdex.Plugins
+
+apply plugin: Plugins.androidLibrary
+apply plugin: Plugins.jetBrainsKotlinAndroid
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinKapt
+apply plugin: Plugins.kotlinParcelize
+apply plugin: Plugins.kotlinxSerialization
+apply plugin: Plugins.daggerHilt
+
+apply from: "$rootDir/library_dependencies.gradle"
+apply from: "$rootDir/build_type.gradle"
+
+android {
+    compileSdkVersion AndroidConfig.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion AndroidConfig.minSdkVersion
+        targetSdkVersion AndroidConfig.targetSdkVersion
+
+        testInstrumentationRunner Build.jUnitRunner
+    }
+
+    with buildTypeConfig
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+}

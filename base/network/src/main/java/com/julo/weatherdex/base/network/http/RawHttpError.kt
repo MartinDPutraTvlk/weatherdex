@@ -1,4 +1,4 @@
-package com.julo.weatherdex.base.network.data
+package com.julo.weatherdex.base.network.http
 
 import com.google.gson.annotations.SerializedName
 

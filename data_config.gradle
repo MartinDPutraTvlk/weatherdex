@@ -1,0 +1,67 @@
+import com.julo.weatherdex.AndroidConfig
+import com.julo.weatherdex.Build
+import com.julo.weatherdex.Plugins
+import com.julo.weatherdex.libs.*
+
+apply plugin: Plugins.androidLibrary
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinKapt
+apply plugin: Plugins.daggerHilt
+apply plugin: Plugins.kotlinParcelize
+
+apply from: "$rootDir/build_type.gradle"
+
+android {
+    compileSdkVersion AndroidConfig.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion AndroidConfig.minSdkVersion
+        targetSdkVersion AndroidConfig.targetSdkVersion
+
+        testInstrumentationRunner Build.jUnitRunner
+    }
+
+    with buildTypeConfig
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        buildConfig = false
+        resValues = false
+    }
+}
+
+dependencies {
+    implementation project(":base:network")
+    implementation project(":base:core")
+
+    implementation Google.hilt
+    kapt Google.hiltCompiler
+    implementation Google.gson
+
+    implementation Jetbrains.coroutineCore
+    implementation SquareUp.retrofit
+
+    /** Testing **/
+    androidTestImplementation AndroidX.testExtJunit
+
+    testImplementation AndroidX.lifeCycleLivedataCore
+    testImplementation UnitTesting.jUnit
+    testImplementation UnitTesting.mockk
+    testImplementation Jetbrains.coroutineTest
+    testImplementation(AndroidX.coreTesting, {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+        exclude group: 'org.mockito', module: 'mockito-core'
+    })
+}
+
+

@@ -1,0 +1,12 @@
+ext.buildTypeConfig = {
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), "$rootDir/proguard-rules.pro"
+        }
+        debug {
+            minifyEnabled false
+            ext.alwaysUpdateBuildId = false
+        }
+    }
+}

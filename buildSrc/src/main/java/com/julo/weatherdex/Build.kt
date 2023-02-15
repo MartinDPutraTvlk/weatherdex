@@ -7,7 +7,7 @@ object Build {
     private const val gradleVersion = "4.2.2"
     const val gradle = "com.android.tools.build:gradle:$gradleVersion"
 
-    private const val gradlePluginVersion = "1.6.21"
+    private const val gradlePluginVersion = "1.6.10"
     const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$gradlePluginVersion"
 
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Google.hiltVersion}"

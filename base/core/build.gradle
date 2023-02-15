@@ -1,0 +1,2 @@
+apply from: "$rootDir/shared_config.gradle"
+apply from: "$rootDir/build_type.gradle"
