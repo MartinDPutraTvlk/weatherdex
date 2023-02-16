@@ -1,54 +1,49 @@
 package com.julo.weatherdex.base.network.di.module
 
 import android.content.Context
-import androidx.viewbinding.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.julo.weatherdex.base.network.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
-import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
-    @Singleton
-    @Provides
-    fun providesRetrofit(
-        @Named("baseUrl") baseUrl: String,
-        gsonConverterFactory: Converter.Factory,
-        okHttpClient: OkHttpClient,
-    ) : Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(gsonConverterFactory)
-            .client(okHttpClient)
-            .build()
-    }
-
     @Provides
     fun provideGsonConverterFactory() : Converter.Factory = GsonConverterFactory.create()
 
     @Provides
-    fun provideOkHttpClient(chuckerInterceptor: ChuckerInterceptor): OkHttpClient {
-        val httpBuilder = OkHttpClient
-            .Builder()
-
-        if(BuildConfig.DEBUG) {
-            httpBuilder.addInterceptor(chuckerInterceptor)
+    fun providesOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        chuckerInterceptor: ChuckerInterceptor
+    ): OkHttpClient {
+        return if(BuildConfig.DEBUG) {
+            OkHttpClient
+                .Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(chuckerInterceptor)
+                .build()
+        } else {
+            OkHttpClient.Builder().build()
         }
+    }
 
-        return httpBuilder.build()
+    @Provides
+    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
     }
 
     @Provides
     fun provideChuckerInterceptor(
-        context: Context
+        @ApplicationContext context: Context
     ): ChuckerInterceptor = ChuckerInterceptor.Builder(context).build()
 }

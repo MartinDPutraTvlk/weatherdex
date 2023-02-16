@@ -1,7 +1,7 @@
 package com.julo.weatherdex.libs
 
 object AndroidX {
-    const val coreKtxVersion = "1.5.10"
+    const val coreKtxVersion = "1.9.0"
     const val coreKtx = "androidx.core:core-ktx:$coreKtxVersion"
 
     private const val appCompatVersion = "1.3.1"
@@ -21,27 +21,23 @@ object AndroidX {
     const val lifeCycleCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifeCycleVersion"
     const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$lifeCycleVersion"
 
-    const val composeVersion = "1.1.0-beta01"
+    const val composeCompilerVersion = "1.4.2"
+
+    private const val composeVersion = "1.3.3"
+    private const val composeMaterialVersion = "1.3.1"
+    private const val composeActivityVersion = "1.6.1"
     const val composeUi = "androidx.compose.ui:ui:$composeVersion"
-    const val composeMaterial = "androidx.compose.material:material:$composeVersion"
+    const val composeMaterial = "androidx.compose.material:material:$composeMaterialVersion"
     const val composeToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
-    const val composeActivity = "androidx.activity:activity-compose:1.3.1"
+    const val composeActivity = "androidx.activity:activity-compose:$composeActivityVersion"
     const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
     const val composeUiTestJunit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
 
     private const val junitExtVersion = "1.1.3"
     const val junitExt = "androidx.test.ext:junit:$junitExtVersion"
 
-
-
-    private const val multidexVersion = "2.0.1"
-    const val multidex = "androidx.multidex:multidex:$multidexVersion"
-
     private const val swipeRefreshLayoutVersion = "1.1.0"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
-
-    private const val legacySupportVersion = "1.0.0"
-    const val legacySupport = "androidx.legacy:legacy-support-v4:$legacySupportVersion"
 
     private const val navigationFragmentVersion = "2.3.5"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationFragmentVersion"
@@ -56,12 +52,6 @@ object AndroidX {
     private const val testEspressoVersion = "3.4.0"
     const val testEspresso = "androidx.test.espresso:espresso-core:$testEspressoVersion"
 
-    private const val pagingRuntimeVersion = "3.0.0-alpha08"
-    const val pagingRuntime = "androidx.paging:paging-runtime-ktx:$pagingRuntimeVersion"
-
     private const val coreTestingVersion = "2.0.0"
     const val coreTesting = "androidx.arch.core:core-testing:$coreTestingVersion"
-
-    private const val exifInterfaceVersion = "1.3.3"
-    const val exifInterface = "androidx.exifinterface:exifinterface:$exifInterfaceVersion"
 }

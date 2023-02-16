@@ -1,4 +1,4 @@
-package com.julo.weatherdex.data.cities.implementation.remote.response
+package com.julo.weatherdex.data.city.implementation.remote.response
 
 import com.google.gson.annotations.SerializedName
 

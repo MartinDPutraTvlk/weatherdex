@@ -13,21 +13,12 @@ dependencies {
     implementation AndroidX.lifeCycleViewModel
     implementation AndroidX.lifeCycleLiveData
     implementation AndroidX.lifeCycleProcess
-    implementation AndroidX.multidex
     implementation AndroidX.swipeRefreshLayout
-    implementation AndroidX.legacySupport
     implementation AndroidX.navigationFragment
     implementation AndroidX.navigationUi
-    implementation AndroidX.pagingRuntime
-    implementation AndroidX.exifInterface
 
     /** Google **/
     implementation Google.materialDesign
-    implementation Google.crashlytics
-    implementation Google.analytics
-    implementation Google.firebaseMessaging
-    implementation Google.firebaseConfig
-    implementation Google.firebasePerformance
     implementation Google.gson
     implementation Google.hilt
     kapt Google.hiltCompiler

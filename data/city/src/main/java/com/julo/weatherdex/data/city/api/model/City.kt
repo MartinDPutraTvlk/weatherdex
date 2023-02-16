@@ -1,4 +1,4 @@
-package com.julo.weatherdex.data.cities.api.model
+package com.julo.weatherdex.data.city.api.model
 
 data class City(
     val name: String = "",

@@ -1,8 +1,8 @@
-package com.julo.weatherdex.data.cities.implementation.mapper
+package com.julo.weatherdex.data.city.implementation.mapper
 
 import com.julo.weatherdex.core.extension.notNull
-import com.julo.weatherdex.data.cities.api.model.City
-import com.julo.weatherdex.data.cities.implementation.remote.response.CityEntity
+import com.julo.weatherdex.data.city.api.model.City
+import com.julo.weatherdex.data.city.implementation.remote.response.CityEntity
 
 fun CityEntity.toCity() = City(
     name = name.notNull(),

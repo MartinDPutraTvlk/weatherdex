@@ -1,16 +1,14 @@
 import com.julo.weatherdex.AndroidConfig
 import com.julo.weatherdex.Build
+import com.julo.weatherdex.Plugins
 import com.julo.weatherdex.libs.AndroidX
 import com.julo.weatherdex.libs.UnitTesting
 import com.julo.weatherdex.libs.Google
 
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-}
+apply plugin: Plugins.androidApplication
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinKapt
+apply plugin: Plugins.daggerHilt
 
 android {
     compileSdkVersion AndroidConfig.compileSdkVersion
@@ -45,7 +43,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion AndroidX.composeVersion
+        kotlinCompilerExtensionVersion AndroidX.composeCompilerVersion
     }
     packagingOptions {
         resources {
@@ -55,6 +53,9 @@ android {
 }
 
 dependencies {
+    implementation project(":data:city")
+    implementation project(":base:network")
+
     implementation AndroidX.coreKtx
     implementation AndroidX.composeUi
     implementation AndroidX.composeMaterial
