@@ -7,4 +7,11 @@ data class City(
     val country: String = "",
     val population: Int = 0,
     val isCapital: Boolean = false,
-)
+) {
+    val isNotEmpty
+        get() = this != EMPTY
+
+    companion object {
+        val EMPTY = City()
+    }
+}
