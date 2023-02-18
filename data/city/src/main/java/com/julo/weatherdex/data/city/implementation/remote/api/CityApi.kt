@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface CityApi {
     @Headers("X-Api-Key: 1pDonunjt76TlAS4tPb4yg==JCWbLbLUhRGFzNJj")
-    @GET("v1/city?name=")
+    @GET("v1/city")
     suspend fun fetchCity(
         @Query("name") name: String,
     ): Array<CityEntity>?

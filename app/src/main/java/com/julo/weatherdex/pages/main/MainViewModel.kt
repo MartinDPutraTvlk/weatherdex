@@ -1,4 +1,4 @@
-package com.julo.weatherdex.pages
+package com.julo.weatherdex.pages.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(
             when(val response = cityRepository.fetchCityData(query)) {
                 is HttpResponse.Success -> {
                     _cityData.update { response.data }
-                    getWeatherForCity(city = response.data)
+                    _isSearching.update { false }
                 }
                 is HttpResponse.Error -> {
                     _cityData.update { City.EMPTY }
@@ -66,9 +66,5 @@ class MainViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    private fun getWeatherForCity(city: City) {
-
     }
 }

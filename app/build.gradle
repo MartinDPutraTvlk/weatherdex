@@ -2,6 +2,7 @@ import com.julo.weatherdex.AndroidConfig
 import com.julo.weatherdex.Build
 import com.julo.weatherdex.Plugins
 import com.julo.weatherdex.libs.AndroidX
+import com.julo.weatherdex.libs.Glide
 import com.julo.weatherdex.libs.UnitTesting
 import com.julo.weatherdex.libs.Google
 
@@ -54,13 +55,18 @@ android {
 
 dependencies {
     implementation project(":data:city")
+    implementation project(":data:weather")
     implementation project(":base:network")
+    implementation project(":base:core")
 
     implementation AndroidX.coreKtx
     implementation AndroidX.composeUi
     implementation AndroidX.composeMaterial
     implementation AndroidX.composeToolingPreview
     implementation AndroidX.composeActivity
+    implementation AndroidX.composeRuntimeLiveData
+
+    implementation Glide.composeGlide
 
     testImplementation UnitTesting.mockk
     testImplementation UnitTesting.jUnit

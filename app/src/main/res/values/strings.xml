@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Weatherdex</string>
+    <string name="julo_text_population">Population: %,d</string>
+    <string name="julo_text_enter_city">Enter City Name</string>
+    <string name="julo_text_close">Close</string>
+    <string name="julo_text_temperature_celcius_degree">Temperature: %1$s °C</string>
+    <string name="julo_text_actual_temperature">Temperature</string>
+    <string name="julo_text_feels_like">Feels Like</string>
+    <string name="julo_text_temperature_morning_celcius_degree">Morning: %1$s °C</string>
+    <string name="julo_text_temperature_day_celcius_degree">Day: %1$s °C</string>
+    <string name="julo_text_temperature_evening_celcius_degree">Evening: %1$s °C</string>
+    <string name="julo_text_temperature_night_celcius_degree">Night: %1$s °C</string>
+    <string name="julo_text_temperature_feels_like_celcius_degree">Feels like: %1$s °C</string>
+    <string name="julo_text_humidity">Humidity: %1$s \%%</string>
+    <string name="julo_text_wind_speed">Wind Speed: %1$s metre/sec</string>
+    <string name="julo_text_todays_weather">Today\'s Weather: %1$s</string>
+    <string name="julo_text_weather_forecast">Weather forecast</string>
 </resources>

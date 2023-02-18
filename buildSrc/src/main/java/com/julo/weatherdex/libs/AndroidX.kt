@@ -32,6 +32,7 @@ object AndroidX {
     const val composeActivity = "androidx.activity:activity-compose:$composeActivityVersion"
     const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
     const val composeUiTestJunit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
+    const val composeRuntimeLiveData = "androidx.compose.runtime:runtime-livedata:$composeVersion"
 
     private const val junitExtVersion = "1.1.3"
     const val junitExt = "androidx.test.ext:junit:$junitExtVersion"

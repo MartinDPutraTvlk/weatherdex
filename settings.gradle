@@ -17,4 +17,5 @@ rootProject.name = "Weatherdex"
 include ':app'
 include ':base:network'
 include ':data:city'
+include ':data:weather'
 include ':base:core'
