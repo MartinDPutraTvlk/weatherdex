@@ -1,4 +1,4 @@
-package com.julo.weatherdex.pages.main
+package com.julo.weatherdex.weather.pages.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class WeatherSearchCityViewModel @Inject constructor(
     private val cityRepository: CityRepository,
     private val favoritesRepository: FavoritesRepository,
 ): ViewModel() {
@@ -26,8 +26,8 @@ class MainViewModel @Inject constructor(
     private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
-    private val _errorMessage = MutableSharedFlow<String>()
-    val errorMessage = _errorMessage.asSharedFlow()
+    private val _snackbarMessage = MutableSharedFlow<String>()
+    val snackbarMessage = _snackbarMessage.asSharedFlow()
 
     private val _cityData = MutableStateFlow(listOf<City>())
     val cityData = _cityData.asStateFlow()
@@ -55,6 +55,18 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun removeFavorite(city: City) {
+        viewModelScope.launch {
+            val success = favoritesRepository.unfavoriteCity(city)
+            if(success) {
+                _snackbarMessage.emit("Successfully removed ${city.name} from favorite list.")
+                fetchFavoriteCityData()
+            } else {
+                _snackbarMessage.emit("Something went wrong. Please try again.")
+            }
+        }
+    }
+
     /** PRIVATE FUN **/
 
     private fun searchCity(query: String) {
@@ -71,17 +83,17 @@ class MainViewModel @Inject constructor(
                     is HttpResponse.Error -> {
                         _cityData.update { listOf() }
                         _isSearching.update { false }
-                        _errorMessage.emit(response.message)
+                        _snackbarMessage.emit(response.message)
                     }
                     is HttpResponse.Empty -> {
                         _cityData.update { listOf() }
                         _isSearching.update { false }
-                        _errorMessage.emit("City not found")
+                        _snackbarMessage.emit("City not found")
                     }
                     else -> {
                         _cityData.update { listOf() }
                         _isSearching.update { false }
-                        _errorMessage.emit("Unknown error occurred")
+                        _snackbarMessage.emit("Unknown error occurred")
                     }
                 }
             }

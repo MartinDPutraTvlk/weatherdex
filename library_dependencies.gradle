@@ -16,6 +16,24 @@ dependencies {
     implementation AndroidX.swipeRefreshLayout
     implementation AndroidX.navigationFragment
     implementation AndroidX.navigationUi
+    implementation AndroidX.composeUi
+    implementation AndroidX.composeMaterial
+    implementation AndroidX.composeToolingPreview
+    implementation AndroidX.composeActivity
+    implementation AndroidX.composeRuntimeLiveData
+    implementation AndroidX.lifeCycleViewModel
+    implementation AndroidX.lifeCycleLiveData
+    implementation AndroidX.lifeCycleProcess
+    implementation AndroidX.lifeCycleLivedataCore
+    implementation AndroidX.lifeCycleCompose
+    implementation AndroidX.lifeCycleRuntime
+
+    debugImplementation AndroidX.composeToolingPreview
+    debugImplementation AndroidX.composeUiTestManifest
+
+    androidTestImplementation AndroidX.junitExt
+    androidTestImplementation AndroidX.testEspresso
+    androidTestImplementation AndroidX.composeUiTestJunit
 
     /** Google **/
     implementation Google.materialDesign
@@ -24,6 +42,9 @@ dependencies {
     kapt Google.hiltCompiler
     implementation Google.maps
     implementation Google.places
+
+    /** Glide **/
+    implementation Glide.composeGlide
 
     /** Jetbrains **/
     implementation Jetbrains.coroutineCore

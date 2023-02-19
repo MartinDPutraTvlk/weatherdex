@@ -1,18 +1,19 @@
 import com.julo.weatherdex.AndroidConfig
 import com.julo.weatherdex.Build
 import com.julo.weatherdex.Plugins
+import com.julo.weatherdex.libs.AndroidX
 
-apply plugin: Plugins.androidApplication
+apply plugin: Plugins.androidLibrary
 apply plugin: Plugins.kotlinAndroid
 apply plugin: Plugins.kotlinKapt
 apply plugin: Plugins.daggerHilt
 apply from: "$rootDir/library_dependencies.gradle"
 
 android {
+    namespace "com.julo.weatherdex.weather"
     compileSdkVersion AndroidConfig.compileSdkVersion
 
     defaultConfig {
-        applicationId AndroidConfig.applicationId
         minSdk AndroidConfig.minSdkVersion
         targetSdk AndroidConfig.targetSdkVersion
         versionCode AndroidConfig.versionCode
@@ -37,6 +38,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion AndroidX.composeCompilerVersion
+    }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -45,5 +52,9 @@ android {
 }
 
 dependencies {
-    implementation project(":weather")
+    implementation project(":data:city")
+    implementation project(":data:weather")
+    implementation project(":data:favorites")
+    implementation project(":base:network")
+    implementation project(":base:core")
 }

@@ -1,5 +1,7 @@
-package com.julo.weatherdex.pages.main
+package com.julo.weatherdex.weather.pages.search
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,9 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,18 +23,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.julo.weatherdex.R
 import com.julo.weatherdex.data.city.api.model.City
-import com.julo.weatherdex.pages.detail.DetailActivity
-import com.julo.weatherdex.ui.theme.BrightRed
-import com.julo.weatherdex.ui.theme.FontFace
-import com.julo.weatherdex.ui.theme.LightPink
+import com.julo.weatherdex.weather.R
+import com.julo.weatherdex.weather.pages.detail.WeatherDetailActivity
+import com.julo.weatherdex.weather.ui.theme.FontFace
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-    private lateinit var viewModel: MainViewModel
+class WeatherSearchCityActivity : ComponentActivity() {
+    private lateinit var viewModel: WeatherSearchCityViewModel
     override fun onResume() {
         super.onResume()
         if(this::viewModel.isInitialized) {
@@ -54,7 +52,7 @@ class MainActivity : ComponentActivity() {
             val scaffoldState = rememberScaffoldState()
 
             LaunchedEffect(Unit) {
-                viewModel.errorMessage.collectLatest {
+                viewModel.snackbarMessage.collectLatest {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = it,
                         duration = SnackbarDuration.Short,
@@ -69,9 +67,6 @@ class MainActivity : ComponentActivity() {
                     SnackbarHost(it) { data ->
                         Snackbar(
                             snackbarData = data,
-                            backgroundColor = LightPink,
-                            contentColor = BrightRed,
-                            actionColor = Color.Black,
                         )
                     }
                 },
@@ -105,9 +100,8 @@ class MainActivity : ComponentActivity() {
                         } else {
                             if (cityData.isNotEmpty()) {
                                 LazyColumn(
-                                    modifier = Modifier.padding(top = 8.dp),
                                     verticalArrangement = Arrangement.spacedBy(8.dp),
-                                    contentPadding = PaddingValues(bottom = 16.dp)
+                                    contentPadding = PaddingValues(vertical = 16.dp)
                                 ) {
                                     items(cityData) { city ->
                                         CityCard(city = city)
@@ -118,13 +112,12 @@ class MainActivity : ComponentActivity() {
                         if (favoritedCities.isNotEmpty()) {
                             Text(
                                 modifier = Modifier.padding(top = 16.dp),
-                                text = "Favorited Cities",
+                                text = stringResource(id = R.string.julo_text_favorite_cities),
                                 style = FontFace.Big.bold,
                             )
                             LazyColumn(
-                                modifier = Modifier.padding(top = 8.dp),
                                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                                contentPadding = PaddingValues(bottom = 16.dp)
+                                contentPadding = PaddingValues(vertical = 16.dp)
                             ) {
                                 items(favoritedCities) { favoritedCity ->
                                     CityCard(city = favoritedCity, isFavorited = true)
@@ -176,7 +169,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .size(32.dp)
                             .align(Alignment.TopEnd)
-                            .padding(end = 8.dp, top = 8.dp),
+                            .padding(end = 8.dp, top = 8.dp)
+                            .clickable { viewModel.removeFavorite(city) },
                         painter = painterResource(id = R.drawable.ic_heart_filled),
                         contentDescription = null,
                     )
@@ -187,11 +181,21 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun navigateToDetailPage(city: City) {
-        DetailActivity.startActivity(
+        WeatherDetailActivity.startActivity(
             this,
             latitude = city.latitude,
             longitude = city.longitude,
             cityName = city.name
         )
+    }
+
+    companion object {
+        fun startActivity(
+            activity: Activity,
+        ) {
+            activity.startActivity(
+                Intent(activity, WeatherSearchCityActivity::class.java)
+            )
+        }
     }
 }

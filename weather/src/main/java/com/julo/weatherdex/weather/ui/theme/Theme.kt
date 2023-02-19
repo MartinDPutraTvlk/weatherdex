@@ -1,4 +1,4 @@
-package com.julo.weatherdex.ui.theme
+package com.julo.weatherdex.weather.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

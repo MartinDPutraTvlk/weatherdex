@@ -1,4 +1,4 @@
-package com.julo.weatherdex.pages.detail
+package com.julo.weatherdex.weather.pages.detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -8,16 +8,16 @@ import com.julo.weatherdex.data.city.api.model.City
 import com.julo.weatherdex.data.favorites.api.repository.FavoritesRepository
 import com.julo.weatherdex.data.weather.api.model.WeatherData
 import com.julo.weatherdex.data.weather.api.repository.WeatherRepository
-import com.julo.weatherdex.pages.detail.DetailActivity.Companion.EXTRA_CITY_NAME
-import com.julo.weatherdex.pages.detail.DetailActivity.Companion.EXTRA_LATITUDE
-import com.julo.weatherdex.pages.detail.DetailActivity.Companion.EXTRA_LONGITUDE
+import com.julo.weatherdex.weather.pages.detail.WeatherDetailActivity.Companion.EXTRA_CITY_NAME
+import com.julo.weatherdex.weather.pages.detail.WeatherDetailActivity.Companion.EXTRA_LATITUDE
+import com.julo.weatherdex.weather.pages.detail.WeatherDetailActivity.Companion.EXTRA_LONGITUDE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(
+class WeatherDetailViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository,
     private val savedStateHandle: SavedStateHandle,
     private val favoritesRepository: FavoritesRepository,

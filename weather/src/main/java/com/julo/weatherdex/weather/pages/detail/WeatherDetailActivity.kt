@@ -1,4 +1,4 @@
-package com.julo.weatherdex.pages.detail
+package com.julo.weatherdex.weather.pages.detail
 
 import android.app.Activity
 import android.content.Intent
@@ -26,21 +26,21 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.julo.weatherdex.R
 import com.julo.weatherdex.core.extension.notNull
 import com.julo.weatherdex.data.weather.api.model.WeatherData
 import com.julo.weatherdex.data.weather.api.model.child.ForecastWeather
 import com.julo.weatherdex.data.weather.api.model.child.TodayWeather
 import com.julo.weatherdex.data.weather.api.model.constant.DailyTemperatureTime
-import com.julo.weatherdex.ui.theme.FontFace
+import com.julo.weatherdex.weather.R
+import com.julo.weatherdex.weather.ui.theme.FontFace
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @AndroidEntryPoint
-class DetailActivity : ComponentActivity() {
-    private lateinit var viewModel: DetailViewModel
+class WeatherDetailActivity : ComponentActivity() {
+    private lateinit var viewModel: WeatherDetailViewModel
 
     private val dateFormat = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.US)
 
@@ -96,9 +96,8 @@ class DetailActivity : ComponentActivity() {
                 style = FontFace.Huge.bold
             )
             LazyColumn(
-                modifier = Modifier.padding(top = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(bottom = 16.dp)
+                contentPadding = PaddingValues(vertical = 16.dp)
             ) {
                 items(daily) {
                     ForecastCard(it)
@@ -449,7 +448,7 @@ class DetailActivity : ComponentActivity() {
             cityName: String,
         ) {
             activity.startActivity(
-                Intent(activity, DetailActivity::class.java).apply {
+                Intent(activity, WeatherDetailActivity::class.java).apply {
                     putExtra(EXTRA_LATITUDE, latitude)
                     putExtra(EXTRA_LONGITUDE, longitude)
                     putExtra(EXTRA_CITY_NAME, cityName)

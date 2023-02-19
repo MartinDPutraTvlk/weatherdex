@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/data/city" />
             <option value="$PROJECT_DIR$/data/favorites" />
             <option value="$PROJECT_DIR$/data/weather" />
+            <option value="$PROJECT_DIR$/weather" />
           </set>
         </option>
       </GradleProjectSettings>
