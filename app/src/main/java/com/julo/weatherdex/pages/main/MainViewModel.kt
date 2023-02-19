@@ -47,14 +47,15 @@ class MainViewModel @Inject constructor(
         searchCity(query)
     }
 
-    /** PRIVATE FUN **/
-    private fun fetchFavoriteCityData() {
+    fun fetchFavoriteCityData() {
         viewModelScope.launch {
             _favoriteCities.update {
                 favoritesRepository.fetchFavoriteCities()
             }
         }
     }
+
+    /** PRIVATE FUN **/
 
     private fun searchCity(query: String) {
         if(query.isNotEmpty()) {

@@ -8,7 +8,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,10 +34,18 @@ import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private lateinit var viewModel: MainViewModel
+    override fun onResume() {
+        super.onResume()
+        if(this::viewModel.isInitialized) {
+            viewModel.fetchFavoriteCityData()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val viewModel = viewModel<MainViewModel>()
+            viewModel = viewModel()
             val searchQuery by viewModel.searchQuery.collectAsState()
             val isSearching by viewModel.isSearching.collectAsState()
             val cityData by viewModel.cityData.collectAsState()

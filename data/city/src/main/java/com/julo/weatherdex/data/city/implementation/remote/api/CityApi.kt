@@ -10,6 +10,6 @@ interface CityApi {
     @GET("v1/city")
     suspend fun fetchCity(
         @Query("name") name: String,
-        @Query("limit") limit: Int = 10,
+        @Query("limit") limit: Int = 5,
     ): Array<CityEntity>?
 }
