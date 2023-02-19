@@ -7,5 +7,5 @@ interface CityRepository {
     /**
      * Fetch a city data from api service given the city name
      * */
-    suspend fun fetchCityData(cityName: String): HttpResponse<City>
+    suspend fun fetchCityData(cityName: String): HttpResponse<List<City>>
 }

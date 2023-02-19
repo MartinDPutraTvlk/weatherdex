@@ -4,8 +4,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.julo.weatherdex.base.network.http.HttpResponse
+import com.julo.weatherdex.data.city.api.model.City
+import com.julo.weatherdex.data.favorites.api.repository.FavoritesRepository
 import com.julo.weatherdex.data.weather.api.model.WeatherData
 import com.julo.weatherdex.data.weather.api.repository.WeatherRepository
+import com.julo.weatherdex.pages.detail.DetailActivity.Companion.EXTRA_CITY_NAME
 import com.julo.weatherdex.pages.detail.DetailActivity.Companion.EXTRA_LATITUDE
 import com.julo.weatherdex.pages.detail.DetailActivity.Companion.EXTRA_LONGITUDE
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,12 +20,16 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository,
     private val savedStateHandle: SavedStateHandle,
+    private val favoritesRepository: FavoritesRepository,
 ): ViewModel() {
     private val latitude
         get() = savedStateHandle.get<Double>(EXTRA_LATITUDE) ?: 0.0
 
     private val longitude
         get() = savedStateHandle.get<Double>(EXTRA_LONGITUDE) ?: 0.0
+
+    private val cityName
+        get() = savedStateHandle.get<String>(EXTRA_CITY_NAME) ?: ""
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -33,8 +40,64 @@ class DetailViewModel @Inject constructor(
     private val _errorMessage = MutableSharedFlow<String>()
     val errorMessage = _errorMessage.asSharedFlow()
 
+    private val _isCityFavorited = MutableStateFlow(false)
+    val isCityFavorited = _isCityFavorited.asStateFlow()
+
     init {
         fetchWeatherData()
+        fetchFavoriteCity()
+    }
+
+    fun onFavoriteButtonPressed() {
+        if(isCityFavorited.value) {
+            unfavoriteCity()
+        } else {
+            favoriteCity()
+        }
+    }
+
+    private fun fetchFavoriteCity() {
+        viewModelScope.launch {
+            val currentCity = City(
+                name = cityName,
+                latitude = latitude,
+                longitude = longitude,
+            )
+            _isCityFavorited.update {
+                favoritesRepository.isCityFavorited(currentCity)
+            }
+        }
+    }
+
+    private fun unfavoriteCity() {
+        viewModelScope.launch {
+            val currentCity = City(
+                name = cityName,
+                latitude = latitude,
+                longitude = longitude,
+            )
+            val isSuccess = favoritesRepository.unfavoriteCity(currentCity)
+            if(isSuccess) {
+                _isCityFavorited.update { false }
+            } else {
+                _errorMessage.emit("Failed to unfavorite city")
+            }
+        }
+    }
+    private fun favoriteCity() {
+        viewModelScope.launch {
+            val currentCity = City(
+                name = cityName,
+                latitude = latitude,
+                longitude = longitude,
+            )
+            val isSuccess = favoritesRepository.favoriteCity(currentCity)
+            if(isSuccess) {
+                _isCityFavorited.update { true }
+            } else {
+                _errorMessage.emit("Failed to favorite city")
+            }
+        }
     }
 
     private fun fetchWeatherData() {

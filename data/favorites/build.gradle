@@ -1,0 +1,5 @@
+apply from: "$rootDir/data_config.gradle"
+
+dependencies {
+    implementation project(":data:city")
+}

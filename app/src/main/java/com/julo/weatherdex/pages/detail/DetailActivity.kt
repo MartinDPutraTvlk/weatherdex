@@ -1,13 +1,12 @@
 package com.julo.weatherdex.pages.detail
 
 import android.app.Activity
-import android.app.LocaleConfig
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -36,7 +35,6 @@ import com.julo.weatherdex.data.weather.api.model.constant.DailyTemperatureTime
 import com.julo.weatherdex.ui.theme.FontFace
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -301,63 +299,80 @@ class DetailActivity : ComponentActivity() {
             shape = RoundedCornerShape(16.dp),
             elevation = 6.dp,
         ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+            val isFavorited by viewModel.isCityFavorited.collectAsState()
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
-                GlideImage(
-                    model = today.weather.iconUrl,
-                    contentDescription = null,
+                Column(
                     modifier = Modifier
-                        .size(50.dp)
-                )
-
-                Text(
-                    modifier = Modifier.padding(top = 16.dp),
-                    text = getDateFormat(today.dateInMillis),
-                    style = FontFace.Huge.normal
-                )
-
-                val cityName = intent.getStringExtra(EXTRA_CITY_NAME).notNull()
-                Text(
-                    modifier = Modifier.padding(top = 4.dp),
-                    text = cityName,
-                    style = FontFace.Huge.bold
-                )
-
-                Text(
-                    modifier = Modifier.padding(top = 4.dp),
-                    text = stringResource(
-                        id = R.string.julo_text_todays_weather,
-                        today.weather.title,
-                    ),
-                    style = FontFace.Big.bold
-                )
-                Text(
-                    text = today.weather.description,
-                    style = FontFace.Regular.secondary
-                )
-
-                ImageWithText(
-                    modifier = Modifier.padding(top = 8.dp),
-                    resourceId = R.drawable.ic_humidity,
-                    text = stringResource(
-                        id = R.string.julo_text_humidity,
-                        today.humidity.toString(),
+                        .align(Alignment.Center),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    GlideImage(
+                        model = today.weather.iconUrl,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(50.dp)
                     )
-                )
 
-                ImageWithDoubleText(
-                    modifier = Modifier.padding(top = 8.dp),
-                    resourceId = R.drawable.ic_temperature,
-                    firstText = stringResource(
-                        id = R.string.julo_text_temperature_celcius_degree,
-                        today.temp.toString(),
-                    ),
-                    secondText = stringResource(
-                        id = R.string.julo_text_temperature_feels_like_celcius_degree,
-                        today.tempFeelsLike.toString(),
-                    ),
+                    Text(
+                        modifier = Modifier.padding(top = 16.dp),
+                        text = getDateFormat(today.dateInMillis),
+                        style = FontFace.Huge.normal
+                    )
+
+                    val cityName = intent.getStringExtra(EXTRA_CITY_NAME).notNull()
+                    Text(
+                        modifier = Modifier.padding(top = 4.dp),
+                        text = cityName,
+                        style = FontFace.Huge.bold
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(top = 4.dp),
+                        text = stringResource(
+                            id = R.string.julo_text_todays_weather,
+                            today.weather.title,
+                        ),
+                        style = FontFace.Big.bold
+                    )
+                    Text(
+                        text = today.weather.description,
+                        style = FontFace.Regular.secondary
+                    )
+
+                    ImageWithText(
+                        modifier = Modifier.padding(top = 8.dp),
+                        resourceId = R.drawable.ic_humidity,
+                        text = stringResource(
+                            id = R.string.julo_text_humidity,
+                            today.humidity.toString(),
+                        )
+                    )
+
+                    ImageWithDoubleText(
+                        modifier = Modifier.padding(top = 8.dp),
+                        resourceId = R.drawable.ic_temperature,
+                        firstText = stringResource(
+                            id = R.string.julo_text_temperature_celcius_degree,
+                            today.temp.toString(),
+                        ),
+                        secondText = stringResource(
+                            id = R.string.julo_text_temperature_feels_like_celcius_degree,
+                            today.tempFeelsLike.toString(),
+                        ),
+                    )
+                }
+
+                Image(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .align(Alignment.TopEnd)
+                        .padding(end = 8.dp, top = 8.dp)
+                        .clickable { viewModel.onFavoriteButtonPressed() },
+                    painter = painterResource(id = if (isFavorited) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty),
+                    contentDescription = null,
                 )
             }
         }

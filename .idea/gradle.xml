@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/city" />
+            <option value="$PROJECT_DIR$/data/favorites" />
             <option value="$PROJECT_DIR$/data/weather" />
           </set>
         </option>
