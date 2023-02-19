@@ -22,10 +22,10 @@ The project is using these following libraries:
   - network: base module for data modules
 
 ### Dependencies graph
-application (app) --Depends to--> feature modules(weather)
-feature modules(weather) --Depends to--> data modules(data.city, data.favorites, data.weather)
-feature modules(weather) --Depends to--> core modules(base.core, base.network)
-data modules(data.city, data.favorites, data.weather) --Depends to--> core modules(base.core, base.network)
+- application (app) --Depends to--> feature modules(weather)
+- feature modules(weather) --Depends to--> data modules(data.city, data.favorites, data.weather)
+- feature modules(weather) --Depends to--> core modules(base.core, base.network)
+- data modules(data.city, data.favorites, data.weather) --Depends to--> core modules(base.core, base.network)
 
 ### Libraries Usage
 1. Jetpack compose: UI related codes
