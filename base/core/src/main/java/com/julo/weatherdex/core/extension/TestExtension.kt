@@ -17,7 +17,11 @@ infix fun <T> Collection<T>?.assertListEqualToIgnoreOrder(other: Collection<T>):
     return true
 }
 
-fun <T> Collection<T>.assertIsEmpty() {
+fun <T> Collection<T>.assertListIsEmpty() {
+    this.isEmpty().assertBoolean()
+}
+
+fun <T> Collection<T>.assertListNotIsEmpty() {
     this.isEmpty().assertBoolean()
 }
 

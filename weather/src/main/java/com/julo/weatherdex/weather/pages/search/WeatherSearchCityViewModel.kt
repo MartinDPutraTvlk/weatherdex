@@ -60,10 +60,10 @@ class WeatherSearchCityViewModel @Inject constructor(
             val success = favoritesRepository.unfavoriteCity(city)
             if(success) {
                 _snackbarMessage.emit("Successfully removed ${city.name} from favorite list.")
-                fetchFavoriteCityData()
             } else {
                 _snackbarMessage.emit("Something went wrong. Please try again.")
             }
+            fetchFavoriteCityData()
         }
     }
 
@@ -98,6 +98,7 @@ class WeatherSearchCityViewModel @Inject constructor(
                 }
             }
         } else {
+            _isSearching.update { false }
             currentlyRunningJob?.cancel()
             _cityData.update { listOf() }
         }

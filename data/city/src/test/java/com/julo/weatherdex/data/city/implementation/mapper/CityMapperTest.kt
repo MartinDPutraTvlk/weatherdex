@@ -17,7 +17,7 @@ class CityMapperTest {
         val result = cityEntities.toCities()
 
         /** Assert **/
-        result.assertIsEmpty()
+        result.assertListIsEmpty()
     }
 
     @Test

@@ -14,4 +14,6 @@ sealed interface HttpResponse<out T> {
         val data: T,
         val meta: Map<String, Any?> = mapOf(),
     ) : HttpResponse<T>
+
+    object Unknown : HttpResponse<Nothing>
 }
