@@ -56,6 +56,8 @@ class WeatherDetailViewModel @Inject constructor(
         }
     }
 
+    /** PRIVATE FUNS **/
+
     private fun fetchFavoriteCity() {
         viewModelScope.launch {
             val currentCity = City(

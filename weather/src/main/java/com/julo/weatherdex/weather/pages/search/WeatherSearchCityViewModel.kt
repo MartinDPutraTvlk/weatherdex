@@ -68,7 +68,6 @@ class WeatherSearchCityViewModel @Inject constructor(
     }
 
     /** PRIVATE FUN **/
-
     private fun searchCity(query: String) {
         if(query.isNotEmpty()) {
             _isSearching.update { true }
