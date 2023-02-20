@@ -9,15 +9,5 @@ object Google {
     const val hiltVersion = "2.45"
     const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
-
-    private const val mapsVersion = "18.0.2"
-    const val maps = "com.google.android.gms:play-services-maps:$mapsVersion"
-
-    private const val placesVersion = "2.5.0"
-    const val places = "com.google.android.libraries.places:places:$placesVersion"
-
-    private const val flexBoxVersion = "3.0.0"
-    const val flexBox = "com.google.android.flexbox:flexbox:$flexBoxVersion"
-
 }
 

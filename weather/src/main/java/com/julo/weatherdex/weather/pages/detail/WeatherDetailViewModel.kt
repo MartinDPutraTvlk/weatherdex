@@ -34,6 +34,9 @@ class WeatherDetailViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing = _isRefreshing.asStateFlow()
+
     private val _weatherData = MutableStateFlow(WeatherData())
     val weatherData = _weatherData.asStateFlow()
 
@@ -44,8 +47,7 @@ class WeatherDetailViewModel @Inject constructor(
     val isCityFavorited = _isCityFavorited.asStateFlow()
 
     init {
-        fetchWeatherData()
-        fetchFavoriteCity()
+        init()
     }
 
     fun onFavoriteButtonPressed() {
@@ -54,6 +56,12 @@ class WeatherDetailViewModel @Inject constructor(
         } else {
             favoriteCity()
         }
+    }
+
+    fun init(isRefreshing: Boolean = false) {
+        _isRefreshing.update { isRefreshing }
+        fetchWeatherData()
+        fetchFavoriteCity()
     }
 
     /** PRIVATE FUNS **/
@@ -112,14 +120,17 @@ class WeatherDetailViewModel @Inject constructor(
                 is HttpResponse.Success -> {
                     _weatherData.update { response.data }
                     _isLoading.update { false }
+                    _isRefreshing.update { false }
                 }
                 is HttpResponse.Error -> {
                     _isLoading.update { false }
                     _errorMessage.emit(response.message)
+                    _isRefreshing.update { false }
                 }
                 else -> {
                     _isLoading.update { false }
                     _errorMessage.emit("Unknown error occurred")
+                    _isRefreshing.update { false }
                 }
             }
         }

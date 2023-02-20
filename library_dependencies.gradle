@@ -40,8 +40,6 @@ dependencies {
     implementation Google.gson
     implementation Google.hilt
     kapt Google.hiltCompiler
-    implementation Google.maps
-    implementation Google.places
 
     /** Glide **/
     implementation Glide.composeGlide

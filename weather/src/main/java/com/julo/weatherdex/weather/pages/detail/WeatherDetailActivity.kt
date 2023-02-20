@@ -11,10 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @AndroidEntryPoint
 class WeatherDetailActivity : ComponentActivity() {
     private lateinit var viewModel: WeatherDetailViewModel
@@ -48,8 +49,12 @@ class WeatherDetailActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             viewModel = viewModel()
+            val refreshing by viewModel.isRefreshing.collectAsState()
             val isLoading by viewModel.isLoading.collectAsState()
             val weatherData by viewModel.weatherData.collectAsState()
+
+            val pullRefreshState = rememberPullRefreshState(refreshing, { viewModel.init(true) })
+
             if (isLoading) {
                 Box(modifier = Modifier.fillMaxSize()) {
                     CircularProgressIndicator(
@@ -57,7 +62,10 @@ class WeatherDetailActivity : ComponentActivity() {
                     )
                 }
             } else {
-                PageContent(weatherData)
+                Box(Modifier.pullRefresh(pullRefreshState)) {
+                    PageContent(weatherData)
+                    PullRefreshIndicator(refreshing, pullRefreshState, Modifier.align(Alignment.TopCenter))
+                }
             }
         }
     }
