@@ -1,11 +1,7 @@
 import com.julo.weatherdex.AndroidConfig
 import com.julo.weatherdex.Build
 import com.julo.weatherdex.Plugins
-import com.julo.weatherdex.libs.AndroidX
-import com.julo.weatherdex.libs.Chucker
-import com.julo.weatherdex.libs.Google
-import com.julo.weatherdex.libs.Jetbrains
-import com.julo.weatherdex.libs.SquareUp
+import com.julo.weatherdex.libs.*
 
 apply plugin: Plugins.androidLibrary
 apply plugin: Plugins.kotlinAndroid

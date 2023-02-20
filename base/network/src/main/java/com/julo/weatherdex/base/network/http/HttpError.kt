@@ -6,15 +6,6 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-/** Error Code. */
-object Error {
-    const val REQUEST_FAILED = 400
-    const val REQUEST_UNAUTHORIZED = 401
-    const val REQUEST_NOT_FOUND = 404
-    const val REQUEST_UNPROCESSABLE_ENTITY = 422
-    const val REQUEST_TOO_MANY = 429
-}
-
 /** Error type when no internet connection. */
 object NoInternetError : HttpResponse.Error(message = "No Internet")
 

@@ -6,15 +6,15 @@ import com.julo.weatherdex.data.weather.implementation.remote.response.child.Dai
 
 data class WeatherEntity(
     @SerializedName("current")
-    val current: CurrentEntity?,
+    val current: CurrentEntity? = null,
     @SerializedName("daily")
-    val daily: List<DailyEntity>?,
+    val daily: List<DailyEntity>? = null,
     @SerializedName("lat")
-    val lat: Double?,
+    val lat: Double? = null,
     @SerializedName("lon")
-    val lon: Double?,
+    val lon: Double? = null,
     @SerializedName("timezone")
-    val timezone: String?,
+    val timezone: String? = null,
     @SerializedName("timezone_offset")
-    val timezone_offset: Int?,
+    val timezone_offset: Int? = null,
 )

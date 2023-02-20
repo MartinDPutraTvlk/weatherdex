@@ -1,9 +1,9 @@
 package com.julo.weatherdex.data.weather.di.module
 
 import com.julo.weatherdex.core.di.IoDispatcher
+import com.julo.weatherdex.data.weather.api.repository.WeatherRepository
 import com.julo.weatherdex.data.weather.implementation.remote.api.WeatherApi
 import com.julo.weatherdex.data.weather.implementation.repository.WeatherRepositoryImpl
-import com.julo.weatherdex.data.weather.api.repository.WeatherRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

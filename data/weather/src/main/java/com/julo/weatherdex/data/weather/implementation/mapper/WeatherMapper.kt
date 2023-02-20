@@ -8,15 +8,16 @@ import com.julo.weatherdex.data.weather.api.model.child.Weather
 import com.julo.weatherdex.data.weather.api.model.constant.DailyTemperatureTime
 import com.julo.weatherdex.data.weather.implementation.remote.response.WeatherEntity
 import com.julo.weatherdex.data.weather.implementation.remote.response.child.*
+import java.util.*
 
 fun WeatherEntity.toWeatherData() = WeatherData(
     daily = daily.toForecastWeather(timezone_offset.notNull()),
     today = current.toToday(timezone_offset.notNull())
 )
 
-private fun List<DailyEntity>?.toForecastWeather(timezone_offset: Int) = this?.mapIndexed { index, dailyEntity ->
-    val todayMillis = System.currentTimeMillis() + timezone_offset
-    val nextDayMillis = (index + 1) * millisInAnHour * 24
+private fun List<DailyEntity>?.toForecastWeather(timezoneOffset: Int) = this?.mapIndexed { index, dailyEntity ->
+    val todayMillis = getDateInMillis(timezoneOffset)
+    val nextDayMillis = (index + 1) * millisInADay
     ForecastWeather(
         dateInMillis = todayMillis + nextDayMillis,
         humidity = dailyEntity.humidity.notNull(),
@@ -47,13 +48,15 @@ private fun TempEntity?.toTemps() = this?.let {
     )
 }.notNull()
 
-private fun CurrentEntity?.toToday(timezone_offset: Int) = TodayWeather(
-    dateInMillis = System.currentTimeMillis() + timezone_offset,
+private fun CurrentEntity?.toToday(timezoneOffset: Int) = TodayWeather(
+    dateInMillis = getDateInMillis(timezoneOffset),
     humidity = this?.humidity.notNull(),
     temp = this?.temp.notNull(),
     tempFeelsLike = this?.feelsLike.notNull(),
     weather = this?.weather.toWeather(),
 )
+
+private fun getDateInMillis(timezoneOffset: Int) = Calendar.getInstance().timeInMillis + timezoneOffset
 
 private fun List<DailyWeatherEntity>?.toWeather() = this?.getOrNull(0)?.let {
     Weather(
@@ -65,4 +68,4 @@ private fun List<DailyWeatherEntity>?.toWeather() = this?.getOrNull(0)?.let {
     )
 } ?: Weather()
 
-private const val millisInAnHour = 1000 * 60 * 60
+private const val millisInADay = 1000 * 60 * 60 * 24

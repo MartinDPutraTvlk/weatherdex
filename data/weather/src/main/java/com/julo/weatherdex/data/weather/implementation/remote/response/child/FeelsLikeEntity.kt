@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class FeelsLikeEntity(
     @SerializedName("morn")
-    val morning: Double?,
+    val morning: Double? = null,
     @SerializedName("day")
-    val day: Double?,
+    val day: Double? = null,
     @SerializedName("eve")
-    val evening: Double?,
+    val evening: Double? = null,
     @SerializedName("night")
-    val night: Double?,
+    val night: Double? = null,
 )

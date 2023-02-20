@@ -1,6 +1,5 @@
 package com.julo.weatherdex
 
-import com.julo.weatherdex.libs.AndroidX
 import com.julo.weatherdex.libs.Google
 
 object Build {

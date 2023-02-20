@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class TempEntity(
     @SerializedName("morn")
-    val morning: Double?,
+    val morning: Double? = null,
     @SerializedName("day")
-    val day: Double?,
+    val day: Double? = null,
     @SerializedName("eve")
-    val evening: Double?,
+    val evening: Double? = null,
     @SerializedName("night")
-    val night: Double?,
+    val night: Double? = null,
     @SerializedName("min")
-    val min: Double?,
+    val min: Double? = null,
     @SerializedName("max")
-    val max: Double?,
+    val max: Double? = null,
 )

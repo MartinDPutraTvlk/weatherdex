@@ -3,9 +3,9 @@ package com.julo.weatherdex.data.weather.implementation.repository
 import com.julo.weatherdex.base.network.http.HttpResponse
 import com.julo.weatherdex.base.network.http.toError
 import com.julo.weatherdex.data.weather.api.model.WeatherData
-import com.julo.weatherdex.data.weather.implementation.remote.api.WeatherApi
 import com.julo.weatherdex.data.weather.api.repository.WeatherRepository
 import com.julo.weatherdex.data.weather.implementation.mapper.toWeatherData
+import com.julo.weatherdex.data.weather.implementation.remote.api.WeatherApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
